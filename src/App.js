@@ -1,7 +1,5 @@
 import { Component } from 'react';
-// import Loader from 'react-loader-spinner';
 
-// import 'react-loader-spinner/dist/loader/css/react-loader-spinner.css';
 import './App.css';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery';
@@ -37,15 +35,6 @@ export default class App extends Component {
       behavior: 'smooth',
     });
   };
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.searchQuery !== this.state.searchQuery) {
-  //     if (this.state.searchQuery === '' || prevState.searchQuery === '') {
-  //       alert('Please enter you search request');
-  //       return;
-  //     }
-  //   }
-  // }
 
   render() {
     const { currentImage, showModal, searchQuery } = this.state;

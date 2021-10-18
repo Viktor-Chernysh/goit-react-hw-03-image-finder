@@ -1,11 +1,12 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'react-loader-spinner';
+
 import ImageGalleryItem from './ImageGalleryItem';
 import s from './ImageGallery.module.css';
 import Button from '../Button/Button';
 import FetchImages from '../../services/image-finder-api';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '23234796-47fbd745329069e6b0b2bf0fd';
@@ -72,6 +73,7 @@ export default class ImageGallery extends Component {
             height={100}
             width={100}
             timeout={3000}
+            className={s.Loader}
           />
         )}
         {searchResults.length > 0 && <Button onClick={this.handleLoadMore} />}
