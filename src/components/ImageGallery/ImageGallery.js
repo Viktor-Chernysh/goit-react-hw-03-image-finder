@@ -39,6 +39,9 @@ export default class ImageGallery extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.searchQuery === '') {
+      return;
+    }
     if (prevProps.searchQuery !== this.props.searchQuery) {
       this.setState({ isLoading: true });
 

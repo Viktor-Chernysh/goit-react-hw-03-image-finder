@@ -16,6 +16,9 @@ export default class App extends Component {
   };
   handleSubmit = searchQuery => {
     this.setState({ searchQuery });
+    if (this.state.searchQuery === '') {
+      return;
+    }
   };
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
@@ -35,6 +38,14 @@ export default class App extends Component {
       behavior: 'smooth',
     });
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchQuery === '' || this.state.searchQuery === '') {
+      if (this.state.searchQuery === '') {
+        alert('EEEEEEEEEE');
+        return;
+      }
+    }
+  }
 
   render() {
     const { currentImage, showModal, searchQuery } = this.state;
@@ -44,7 +55,7 @@ export default class App extends Component {
       <div className="App">
         {showModal && (
           <Modal toggleModal={toggleModal}>
-            <img src={currentImage.url} alt={currentImage.alt} />{' '}
+            <img src={currentImage.url} alt={currentImage.alt} />
           </Modal>
         )}
         <Searchbar onSubmit={handleSubmit} />
