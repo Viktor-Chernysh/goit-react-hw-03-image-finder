@@ -13,11 +13,15 @@ export default class FetchImages {
     return (this._page += value);
   }
   searchPhotos(searchQuery, perPage) {
-    axios.defaults.baseURL = this.BASE_URL;
-    let url = `?key=${this.API_KEY}&q=${searchQuery}&per_page=${perPage}&page=${this._page}`;
-    return axios
-      .get(url)
-      .then(res => res.data.hits)
-      .catch(error => console.log(error.message));
+    try {
+      axios.defaults.baseURL = this.BASE_URL;
+      let url = `?key=${this.API_KEY}&q=${searchQuery}&per_page=${perPage}&page=${this._page}`;
+      return axios
+        .get(url)
+        .then(res => res.data.hits)
+        .catch(error => console.log(error.message));
+    } catch (error) {
+      alert(error);
+    }
   }
 }

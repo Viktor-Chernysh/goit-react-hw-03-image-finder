@@ -1,9 +1,11 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import Loader from 'react-loader-spinner';
 import ImageGalleryItem from './ImageGalleryItem';
 import s from './ImageGallery.module.css';
 import Button from '../Button/Button';
 import FetchImages from '../../services/image-finder-api';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '23234796-47fbd745329069e6b0b2bf0fd';
@@ -18,6 +20,7 @@ export default class ImageGallery extends Component {
       alt: '',
     },
   };
+
   handleLoadMore = () => {
     this.setState({ isLoading: true });
     newFetchImages.page = 1;
@@ -27,13 +30,9 @@ export default class ImageGallery extends Component {
         isLoading: false,
       })),
     );
-
-    // console.log(newFetchImages.page);
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+    this.props.scrollTo();
   };
+
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
   };
@@ -41,6 +40,7 @@ export default class ImageGallery extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchQuery !== this.props.searchQuery) {
       this.setState({ isLoading: true });
+
       newFetchImages
         .searchPhotos(this.props.searchQuery, 12)
         .then(searchResults => {
@@ -48,21 +48,24 @@ export default class ImageGallery extends Component {
             searchResults,
             isLoading: false,
           });
+          if (this.state.searchResults.length === 0) {
+            alert('No results');
+          }
         });
     }
   }
 
   render() {
-    const dataResults = this.state.searchResults;
+    const { searchResults, isLoading } = this.state;
     return (
       <>
         <ul className={s.ImageGallery}>
           <ImageGalleryItem
-            searchResults={this.state.searchResults}
+            searchResults={searchResults}
             onClick={this.props.clickOnImage}
           />
         </ul>
-        {this.state.isLoading && (
+        {isLoading && (
           <Loader
             type="Bars"
             color="#00BFFF"
@@ -71,8 +74,11 @@ export default class ImageGallery extends Component {
             timeout={3000}
           />
         )}
-        {dataResults.length > 0 && <Button onClick={this.handleLoadMore} />}
+        {searchResults.length > 0 && <Button onClick={this.handleLoadMore} />}
       </>
     );
   }
 }
+ImageGallery.propTypes = {
+  clickOnImage: PropTypes.func,
+};

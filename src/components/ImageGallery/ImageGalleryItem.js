@@ -19,4 +19,5 @@ export default function ImageGalleryItem({ searchResults, onClick }) {
 }
 ImageGalleryItem.propTypes = {
   searchResults: PropTypes.array,
+  onClick: PropTypes.func,
 };

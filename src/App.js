@@ -39,19 +39,21 @@ export default class App extends Component {
   };
 
   render() {
+    const { currentImage, showModal, searchQuery } = this.state;
+    const { toggleModal, handleSubmit, handleGalleryItem, scrollOnLoadButton } =
+      this;
     return (
       <div className="App">
-        {this.state.showModal && (
-          <Modal
-            currentImage={this.state.currentImage}
-            toggleModal={this.toggleModal}
-          />
+        {showModal && (
+          <Modal toggleModal={toggleModal}>
+            <img src={currentImage.url} alt={currentImage.alt} />{' '}
+          </Modal>
         )}
-        <Searchbar onSubmit={this.handleSubmit} />
+        <Searchbar onSubmit={handleSubmit} />
         <ImageGallery
-          searchQuery={this.state.searchQuery}
-          clickOnImage={this.handleGalleryItem}
-          scroll={this.scrollOnLoadButton}
+          searchQuery={searchQuery}
+          clickOnImage={handleGalleryItem}
+          scrollTo={scrollOnLoadButton}
         />
       </div>
     );
