@@ -38,14 +38,6 @@ export default class App extends Component {
       behavior: 'smooth',
     });
   };
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchQuery === '' || this.state.searchQuery === '') {
-      if (this.state.searchQuery === '') {
-        alert('EEEEEEEEEE');
-        return;
-      }
-    }
-  }
 
   render() {
     const { currentImage, showModal, searchQuery } = this.state;

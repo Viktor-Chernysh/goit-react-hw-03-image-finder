@@ -40,6 +40,7 @@ export default class ImageGallery extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.searchQuery === '') {
+      alert('Please enter u request ');
       return;
     }
     if (prevProps.searchQuery !== this.props.searchQuery) {
