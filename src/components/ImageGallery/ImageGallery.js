@@ -24,13 +24,13 @@ export default class ImageGallery extends Component {
   handleLoadMore = () => {
     this.setState({ isLoading: true });
     newFetchImages.page = 1;
-    newFetchImages.searchPhotos(this.props.searchQuery, 12).then(results =>
+    newFetchImages.searchPhotos(this.props.searchQuery, 12).then(results => {
       this.setState(prevState => ({
         searchResults: [...prevState.searchResults, ...results],
         isLoading: false,
-      })),
-    );
-    this.props.scrollTo();
+      }));
+      this.props.scrollTo();
+    });
   };
 
   toggleModal = () => {

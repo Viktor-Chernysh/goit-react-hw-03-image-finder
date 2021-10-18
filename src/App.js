@@ -38,6 +38,15 @@ export default class App extends Component {
     });
   };
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.searchQuery !== this.state.searchQuery) {
+  //     if (this.state.searchQuery === '' || prevState.searchQuery === '') {
+  //       alert('Please enter you search request');
+  //       return;
+  //     }
+  //   }
+  // }
+
   render() {
     const { currentImage, showModal, searchQuery } = this.state;
     const { toggleModal, handleSubmit, handleGalleryItem, scrollOnLoadButton } =
